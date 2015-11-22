@@ -106,6 +106,7 @@
     <Compile Include="MainWindowController.designer.cs">
       <DependentUpon>MainWindowController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\NativeDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
@@ -119,5 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewControllers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

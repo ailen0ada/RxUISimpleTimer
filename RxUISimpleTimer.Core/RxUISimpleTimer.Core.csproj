@@ -76,6 +76,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\OperationViewModel.cs" />
+    <Compile Include="Models\IDialogService.cs" />
+    <Compile Include="Models\IFeedbackService.cs" />
+    <Compile Include="Models\SimpleTimer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
