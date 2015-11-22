@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio 2012
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxUISimpleTimer.Wpf", "RxUISimpleTimer.Wpf\RxUISimpleTimer.Wpf.csproj", "{54A09617-6FB0-43ED-9BB7-4F72D607D909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxUISimpleTimer.Core", "RxUISimpleTimer.Core\RxUISimpleTimer.Core.csproj", "{5C0D5A47-7388-4725-8319-721B4C26B4AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RxUISimpleTimer.Mac", "RxUISimpleTimer.Mac\RxUISimpleTimer.Mac.csproj", "{474684A5-8A75-426F-B17A-3A79299CF8FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{474684A5-8A75-426F-B17A-3A79299CF8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474684A5-8A75-426F-B17A-3A79299CF8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{474684A5-8A75-426F-B17A-3A79299CF8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{474684A5-8A75-426F-B17A-3A79299CF8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54A09617-6FB0-43ED-9BB7-4F72D607D909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54A09617-6FB0-43ED-9BB7-4F72D607D909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54A09617-6FB0-43ED-9BB7-4F72D607D909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54A09617-6FB0-43ED-9BB7-4F72D607D909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0D5A47-7388-4725-8319-721B4C26B4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0D5A47-7388-4725-8319-721B4C26B4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0D5A47-7388-4725-8319-721B4C26B4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0D5A47-7388-4725-8319-721B4C26B4AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
