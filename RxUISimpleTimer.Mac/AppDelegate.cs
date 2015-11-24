@@ -15,7 +15,7 @@ namespace RxUISimpleTimer.Mac
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            Locator.CurrentMutable.RegisterLazySingleton(() => NativeDialog, typeof(IDialogService));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new NativeDialog(), typeof(IDialogService));
         }
 
         public override void WillTerminate(NSNotification notification)

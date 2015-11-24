@@ -113,13 +113,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\RxUISimpleTimer.Core\RxUISimpleTimer.Core.csproj">
-      <Project>{5C0D5A47-7388-4725-8319-721B4C26B4AE}</Project>
-      <Name>RxUISimpleTimer.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="ViewControllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RxUISimpleTimer.Core\RxUISimpleTimer.Core.csproj">
+      <Project>{D4ECCCEF-0BE9-4F8F-B238-649B4630E7AB}</Project>
+      <Name>RxUISimpleTimer.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
