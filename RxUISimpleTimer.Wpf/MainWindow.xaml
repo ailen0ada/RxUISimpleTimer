@@ -4,9 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RxUISimpleTimer.Wpf"
+        xmlns:viewModels="clr-namespace:RxUISimpleTimer.Core.ViewModels;assembly=RxUISimpleTimer.Core"
+        xmlns:models="clr-namespace:RxUISimpleTimer.Core.Models;assembly=RxUISimpleTimer.Core"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <viewModels:OperationViewModel />
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Elapsed, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Start" Command="{Binding Start, Mode=OneWay}" />
+            <Button Content="Stop" Command="{Binding Stop, Mode=OneWay}" />
+            <Button Content="Lap" Command="{Binding Lap, Mode=OneWay}" />
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5,0" />
+                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="MinWidth" Value="100" />
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
+        <ListBox Grid.Row="2" ItemsSource="{Binding LapTimes, Mode=OneWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:LapTime}">
+                    <UniformGrid Rows="1">
+                        <TextBlock Text="{Binding Elapsed, StringFormat={}hh\\:mm\\:ss\\.fff}" />
+                        <TextBlock Text="{Binding Duration, StringFormat={}hh\\:mm\\:ss\\.fff}" />
+                    </UniformGrid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

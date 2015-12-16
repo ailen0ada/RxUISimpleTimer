@@ -96,6 +96,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NativeModels\DialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,6 +123,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RxUISimpleTimer.Core\RxUISimpleTimer.Core.csproj">
+      <Project>{d4ecccef-0be9-4f8f-b238-649b4630e7ab}</Project>
+      <Name>RxUISimpleTimer.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
