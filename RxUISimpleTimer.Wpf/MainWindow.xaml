@@ -7,7 +7,7 @@
         xmlns:viewModels="clr-namespace:RxUISimpleTimer.Core.ViewModels;assembly=RxUISimpleTimer.Core"
         xmlns:models="clr-namespace:RxUISimpleTimer.Core.Models;assembly=RxUISimpleTimer.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="250" Width="350" MinHeight="250" MinWidth="350">
     <Window.DataContext>
         <viewModels:OperationViewModel />
     </Window.DataContext>
