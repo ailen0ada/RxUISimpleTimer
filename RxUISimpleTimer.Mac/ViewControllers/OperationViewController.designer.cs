@@ -16,7 +16,7 @@ namespace RxUISimpleTimer.Mac.ViewControllers
 		AppKit.NSTextField CurrentValueField { get; set; }
 
 		[Outlet]
-		AppKit.NSButton RapButton { get; set; }
+		AppKit.NSButton LapButton { get; set; }
 
 		[Outlet]
 		AppKit.NSButton StartButton { get; set; }
@@ -26,24 +26,24 @@ namespace RxUISimpleTimer.Mac.ViewControllers
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (CurrentValueField != null) {
+				CurrentValueField.Dispose ();
+				CurrentValueField = null;
+			}
+
+			if (LapButton != null) {
+				LapButton.Dispose ();
+				LapButton = null;
+			}
+
 			if (StartButton != null) {
 				StartButton.Dispose ();
 				StartButton = null;
 			}
 
-			if (RapButton != null) {
-				RapButton.Dispose ();
-				RapButton = null;
-			}
-
 			if (StopButton != null) {
 				StopButton.Dispose ();
 				StopButton = null;
-			}
-
-			if (CurrentValueField != null) {
-				CurrentValueField.Dispose ();
-				CurrentValueField = null;
 			}
 		}
 	}

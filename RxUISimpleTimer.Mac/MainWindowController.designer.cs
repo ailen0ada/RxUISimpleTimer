@@ -12,11 +12,34 @@ namespace RxUISimpleTimer.Mac
 	[Register ("MainWindowController")]
 	partial class MainWindowController
 	{
+		[Outlet]
+		AppKit.NSToolbarItem LapButtonItem { get; set; }
+
+		[Outlet]
+		AppKit.NSToolbarItem StartButtonItem { get; set; }
+
+		[Outlet]
+		AppKit.NSToolbarItem StopButtonItem { get; set; }
+
 		[Action ("ShowHistoryBar:")]
 		partial void ShowHistoryBar (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (StartButtonItem != null) {
+				StartButtonItem.Dispose ();
+				StartButtonItem = null;
+			}
+
+			if (LapButtonItem != null) {
+				LapButtonItem.Dispose ();
+				LapButtonItem = null;
+			}
+
+			if (StopButtonItem != null) {
+				StopButtonItem.Dispose ();
+				StopButtonItem = null;
+			}
 		}
 	}
 }

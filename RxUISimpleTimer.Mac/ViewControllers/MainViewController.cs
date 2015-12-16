@@ -19,6 +19,8 @@ namespace RxUISimpleTimer.Mac.ViewControllers
             base.ViewDidLoad();
 
             // Do any additional setup after loading the view.
+
+            View.WantsLayer = true;
         }
 
         public override NSObject RepresentedObject

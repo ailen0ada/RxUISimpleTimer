@@ -6,6 +6,8 @@ using Foundation;
 using AppKit;
 using ReactiveUI;
 using RxUISimpleTimer.Core.ViewModels;
+using Splat;
+using System.Diagnostics;
 
 namespace RxUISimpleTimer.Mac.ViewControllers
 {
@@ -20,7 +22,11 @@ namespace RxUISimpleTimer.Mac.ViewControllers
         {
             base.ViewDidLoad();
 
-            VM = new OperationViewModel();
+            VM = Locator.CurrentMutable.GetService<OperationViewModel>();
+            this.OneWayBind(VM, vm => vm.Elapsed, v => v.CurrentValueField.StringValue);
+            this.BindCommand(VM, vm => vm.Start, v => v.StartButton);
+            this.BindCommand(VM, vm => vm.Stop, v => v.StopButton);
+            this.BindCommand(VM, vm => vm.Lap, v => v.LapButton);
         }
 
         private OperationViewModel VM;

@@ -3,6 +3,9 @@ using Foundation;
 using Splat;
 using RxUISimpleTimer.Mac.Models;
 using RxUISimpleTimer.Core.Models;
+using RxUISimpleTimer.Core.ViewModels;
+using System.Reactive.Concurrency;
+using ReactiveUI;
 
 namespace RxUISimpleTimer.Mac
 {
@@ -11,11 +14,12 @@ namespace RxUISimpleTimer.Mac
     {
         public AppDelegate()
         {
+            Locator.CurrentMutable.RegisterLazySingleton(() => new NativeDialog(), typeof(IDialogService));
+            Locator.CurrentMutable.RegisterLazySingleton(() => new OperationViewModel(RxApp.MainThreadScheduler), typeof(OperationViewModel));
         }
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            Locator.CurrentMutable.RegisterLazySingleton(() => new NativeDialog(), typeof(IDialogService));
         }
 
         public override void WillTerminate(NSNotification notification)
