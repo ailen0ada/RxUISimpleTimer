@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using ReactiveUI;
 using Splat;
 using RxUISimpleTimer.Core.Models;
@@ -29,15 +28,19 @@ namespace RxUISimpleTimer.Core.ViewModels
             LapTimes = new ReactiveList<LapTime>();
             Lap = ReactiveCommand.CreateAsyncObservable(this.WhenAny(m => m.TimerState, m => m.Value == TimerState.Running), _ => Observable.Return(stopWatch.Elapsed));
             Lap.Subscribe(x => LapTimes.Add(new LapTime(x, x - (LapTimes.LastOrDefault()?.Elapsed ?? TimeSpan.Zero))));
+            this.WhenAny(vm => vm.TimerState, oc => oc.Value == TimerState.Initial).Subscribe(_ => LapTimes.Reset());
 
             Observable.Interval(TimeSpan.FromMilliseconds(10d))
-                .Where(_ => timerState != TimerState.Initial)
-                .Select(_ => stopWatch.Elapsed.ToString(FormatString))
-                .ToProperty(this, vm => vm.Elapsed, out elapsed, TimeSpan.Zero.ToString(FormatString), scheduler);
+                .Select(_ => GetFormattedElapsed(stopWatch.Elapsed))
+                .ToProperty(this, vm => vm.Elapsed, out elapsed, GetFormattedElapsed(TimeSpan.Zero), scheduler);
         }
 
-        private const string FormatString = @"hh\:mm\:ss\.fff";
+        private const string FormatStringWithoutMsec = @"hh\:mm\:ss";
 
+        private const string FormatStringWithMsec = @"hh\:mm\:ss\.fff";
+
+        public string GetFormattedElapsed(TimeSpan t) => t.ToString(showMilliseconds ? FormatStringWithMsec : FormatStringWithoutMsec);
+        
         private readonly IDialogService dialogService;
 
         private readonly Stopwatch stopWatch;
@@ -65,7 +68,6 @@ namespace RxUISimpleTimer.Core.ViewModels
                         return;
                     stopWatch.Reset();
                     LapTimes.Clear();
-                    Task.Delay(10).Wait();  // bad
                     TimerState = TimerState.Initial;
                     break;
                 case TimerState.Initial:
@@ -84,6 +86,14 @@ namespace RxUISimpleTimer.Core.ViewModels
         {
             get { return timerState; }
             set { this.RaiseAndSetIfChanged(ref timerState, value); }
+        }
+
+        private bool showMilliseconds = true;
+
+        public bool ShowMilliseconds
+        {
+            get { return showMilliseconds; }
+            set { this.RaiseAndSetIfChanged(ref showMilliseconds, value); }
         }
 
         private readonly ObservableAsPropertyHelper<string> elapsed;

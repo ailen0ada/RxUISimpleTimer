@@ -35,6 +35,7 @@
             this.LapButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.StartButton = new System.Windows.Forms.Button();
+            this.ShowMsecCheck = new System.Windows.Forms.CheckBox();
             this.MainLayout.SuspendLayout();
             this.ButtonsPanel.SuspendLayout();
             this.SuspendLayout();
@@ -44,14 +45,16 @@
             this.MainLayout.ColumnCount = 1;
             this.MainLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainLayout.Controls.Add(this.ElapsedLabel, 0, 0);
-            this.MainLayout.Controls.Add(this.LapTimes, 0, 2);
-            this.MainLayout.Controls.Add(this.ButtonsPanel, 0, 1);
+            this.MainLayout.Controls.Add(this.LapTimes, 0, 3);
+            this.MainLayout.Controls.Add(this.ButtonsPanel, 0, 2);
+            this.MainLayout.Controls.Add(this.ShowMsecCheck, 0, 1);
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainLayout.Location = new System.Drawing.Point(0, 0);
             this.MainLayout.Name = "MainLayout";
-            this.MainLayout.RowCount = 3;
-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.MainLayout.RowCount = 4;
+            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.MainLayout.Size = new System.Drawing.Size(482, 453);
             this.MainLayout.TabIndex = 4;
@@ -63,7 +66,7 @@
             this.ElapsedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ElapsedLabel.Location = new System.Drawing.Point(3, 0);
             this.ElapsedLabel.Name = "ElapsedLabel";
-            this.ElapsedLabel.Size = new System.Drawing.Size(476, 135);
+            this.ElapsedLabel.Size = new System.Drawing.Size(476, 113);
             this.ElapsedLabel.TabIndex = 1;
             this.ElapsedLabel.Text = "00:00:00.000";
             this.ElapsedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -88,20 +91,20 @@
             this.ButtonsPanel.Controls.Add(this.StopButton, 1, 0);
             this.ButtonsPanel.Controls.Add(this.StartButton, 0, 0);
             this.ButtonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ButtonsPanel.Location = new System.Drawing.Point(3, 138);
+            this.ButtonsPanel.Location = new System.Drawing.Point(3, 161);
             this.ButtonsPanel.Name = "ButtonsPanel";
             this.ButtonsPanel.RowCount = 1;
             this.ButtonsPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsPanel.Size = new System.Drawing.Size(476, 84);
+            this.ButtonsPanel.Size = new System.Drawing.Size(476, 61);
             this.ButtonsPanel.TabIndex = 3;
             // 
             // LapButton
             // 
             this.LapButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LapButton.Location = new System.Drawing.Point(336, 20);
-            this.LapButton.Margin = new System.Windows.Forms.Padding(20);
+            this.LapButton.Location = new System.Drawing.Point(326, 10);
+            this.LapButton.Margin = new System.Windows.Forms.Padding(10);
             this.LapButton.Name = "LapButton";
-            this.LapButton.Size = new System.Drawing.Size(120, 44);
+            this.LapButton.Size = new System.Drawing.Size(140, 41);
             this.LapButton.TabIndex = 8;
             this.LapButton.Text = "Lap";
             this.LapButton.UseVisualStyleBackColor = true;
@@ -109,10 +112,10 @@
             // StopButton
             // 
             this.StopButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StopButton.Location = new System.Drawing.Point(178, 20);
-            this.StopButton.Margin = new System.Windows.Forms.Padding(20);
+            this.StopButton.Location = new System.Drawing.Point(168, 10);
+            this.StopButton.Margin = new System.Windows.Forms.Padding(10);
             this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(118, 44);
+            this.StopButton.Size = new System.Drawing.Size(138, 41);
             this.StopButton.TabIndex = 7;
             this.StopButton.Text = "Stop";
             this.StopButton.UseVisualStyleBackColor = true;
@@ -120,13 +123,25 @@
             // StartButton
             // 
             this.StartButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StartButton.Location = new System.Drawing.Point(20, 20);
-            this.StartButton.Margin = new System.Windows.Forms.Padding(20);
+            this.StartButton.Location = new System.Drawing.Point(10, 10);
+            this.StartButton.Margin = new System.Windows.Forms.Padding(10);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(118, 44);
+            this.StartButton.Size = new System.Drawing.Size(138, 41);
             this.StartButton.TabIndex = 6;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = true;
+            // 
+            // ShowMsecCheck
+            // 
+            this.ShowMsecCheck.AutoSize = true;
+            this.ShowMsecCheck.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ShowMsecCheck.Location = new System.Drawing.Point(10, 123);
+            this.ShowMsecCheck.Margin = new System.Windows.Forms.Padding(10);
+            this.ShowMsecCheck.Name = "ShowMsecCheck";
+            this.ShowMsecCheck.Size = new System.Drawing.Size(462, 25);
+            this.ShowMsecCheck.TabIndex = 4;
+            this.ShowMsecCheck.Text = "Show milliseconds";
+            this.ShowMsecCheck.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -153,6 +168,7 @@
         private System.Windows.Forms.Button LapButton;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.CheckBox ShowMsecCheck;
     }
 }
 

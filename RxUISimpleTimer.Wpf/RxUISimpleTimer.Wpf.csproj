@@ -90,6 +90,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Behaviors\GridViewColumnResize.cs" />
+    <Compile Include="Converters\IndexConverter.cs" />
     <Compile Include="NativeModels\DialogService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

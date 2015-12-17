@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Reactive.Concurrency;
-using System.Threading;
 using System.Windows.Forms;
 using ReactiveUI;
 using ReactiveUI.Winforms;
@@ -15,14 +12,16 @@ namespace RxUISimpleTimer.WinForms
         {
             InitializeComponent();
 
-            ViewModel = new OperationViewModel(new SynchronizationContextScheduler(SynchronizationContext.Current));
+            ViewModel = new OperationViewModel(RxApp.MainThreadScheduler);
             this.OneWayBind(ViewModel, vm => vm.Elapsed, v => v.ElapsedLabel.Text);
+            this.Bind(ViewModel, vm => vm.ShowMilliseconds, v => v.ShowMsecCheck.Checked);
             this.BindCommand(ViewModel, vm => vm.Start, v => v.StartButton);
             this.BindCommand(ViewModel, vm => vm.Stop, v => v.StopButton);
             this.BindCommand(ViewModel, vm => vm.Lap, v => v.LapButton);
 
-            LapTimesBindingList = ViewModel.LapTimes.CreateDerivedBindingList(x => $"{x.Elapsed:hh\\:mm\\:ss\\.fff} - {x.Duration:hh\\:mm\\:ss\\.fff}");
+            LapTimesBindingList = ViewModel.LapTimes.CreateDerivedBindingList(x => $"{ViewModel.GetFormattedElapsed(x.Elapsed)} - {ViewModel.GetFormattedElapsed(x.Duration)}");
             LapTimes.DataSource = LapTimesBindingList;
+            ViewModel.WhenAny(vm => vm.ShowMilliseconds, oc => true).Subscribe(_ => LapTimesBindingList.Reset());
         }
 
         private IReactiveDerivedBindingList<string> LapTimesBindingList { get; } 

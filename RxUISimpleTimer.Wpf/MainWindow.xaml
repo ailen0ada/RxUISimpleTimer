@@ -6,19 +6,29 @@
         xmlns:local="clr-namespace:RxUISimpleTimer.Wpf"
         xmlns:viewModels="clr-namespace:RxUISimpleTimer.Core.ViewModels;assembly=RxUISimpleTimer.Core"
         xmlns:models="clr-namespace:RxUISimpleTimer.Core.Models;assembly=RxUISimpleTimer.Core"
+        xmlns:converters="clr-namespace:RxUISimpleTimer.Wpf.Converters"
+        xmlns:behaviors="clr-namespace:RxUISimpleTimer.Wpf.Behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="250" Width="350" MinHeight="250" MinWidth="350">
     <Window.DataContext>
         <viewModels:OperationViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <converters:IndexConverter x:Key="IndexConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding Elapsed, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+        <TextBlock Text="{Binding Elapsed, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontSize="16" />
+        <CheckBox Grid.Row="1" Content="Show milliseconds" IsChecked="{Binding ShowMilliseconds, Mode=TwoWay}"
+                  Margin="4" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2">
             <Button Content="Start" Command="{Binding Start, Mode=OneWay}" />
             <Button Content="Stop" Command="{Binding Stop, Mode=OneWay}" />
             <Button Content="Lap" Command="{Binding Lap, Mode=OneWay}" />
@@ -30,20 +40,57 @@
                 </Style>
             </StackPanel.Resources>
         </StackPanel>
-        <ListBox Grid.Row="2" ItemsSource="{Binding LapTimes, Mode=OneWay}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ListBoxItem}">
+        <ListView Grid.Row="3" ItemsSource="{Binding LapTimes, Mode=OneWay}"
+                  HorizontalAlignment="Stretch" behaviors:GridViewColumnResize.Enabled="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Lap"
+                                    DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}" />
+                    <GridViewColumn Header="Elapsed" behaviors:GridViewColumnResize.Width="*">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:LapTime}">
+                                <TextBlock HorizontalAlignment="Center">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                            <Binding Path="Elapsed.Hours" />
+                                            <Binding Path="Elapsed.Minutes" />
+                                            <Binding Path="Elapsed.Seconds" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                    <TextBlock
+                                        Text="{Binding Elapsed.Milliseconds, Mode=OneWay, StringFormat={}.{0:D3}}"
+                                        Visibility="{Binding DataContext.ShowMilliseconds, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    </TextBlock>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Duration" behaviors:GridViewColumnResize.Width="*">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type models:LapTime}">
+                                <TextBlock HorizontalAlignment="Center">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+                                            <Binding Path="Duration.Hours" />
+                                            <Binding Path="Duration.Minutes" />
+                                            <Binding Path="Duration.Seconds" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                    <TextBlock
+                                        Text="{Binding Duration.Milliseconds, Mode=OneWay, StringFormat={}.{0:D3}}"
+                                        Visibility="{Binding DataContext.ShowMilliseconds, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    </TextBlock>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type models:LapTime}">
-                    <UniformGrid Rows="1">
-                        <TextBlock Text="{Binding Elapsed, StringFormat={}hh\\:mm\\:ss\\.fff}" />
-                        <TextBlock Text="{Binding Duration, StringFormat={}hh\\:mm\\:ss\\.fff}" />
-                    </UniformGrid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.Resources>
+        </ListView>
     </Grid>
 </Window>
