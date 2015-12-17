@@ -6,10 +6,14 @@ using Foundation;
 using AppKit;
 using RxUISimpleTimer.Mac.ViewControllers;
 using System.Diagnostics;
+using RxUISimpleTimer.Core.ViewModels;
+using ReactiveUI;
+using Splat;
+using VideoToolbox;
 
 namespace RxUISimpleTimer.Mac
 {
-    public partial class MainWindowController : NSWindowController
+    public partial class MainWindowController : NSWindowController, IViewFor<OperationViewModel>
     {
         public MainWindowController(IntPtr handle)
             : base(handle)
@@ -27,5 +31,50 @@ namespace RxUISimpleTimer.Mac
 
             vc.HistoryView.Collapsed = !vc.HistoryView.Collapsed;
         }
+
+        public override void WindowDidLoad()
+        {
+            base.WindowDidLoad();
+
+            VM = Locator.CurrentMutable.GetService<OperationViewModel>();
+
+            this.BindCommand(VM, vm => vm.Start, v => v.StartButtonItem);
+            this.BindCommand(VM, vm => vm.Stop, v => v.StopButtonItem);
+            this.BindCommand(VM, vm => vm.Lap, v => v.LapButtonItem);
+        }
+
+        private OperationViewModel VM;
+
+        #region IViewFor implementation
+
+        OperationViewModel IViewFor<OperationViewModel>.ViewModel
+        {
+            get
+            {
+                return VM;
+            }
+            set
+            {
+                VM = value;
+            }
+        }
+
+        #endregion
+
+        #region IViewFor implementation
+
+        object IViewFor.ViewModel
+        {
+            get
+            {
+                return VM;  
+            }
+            set
+            {
+                VM = (OperationViewModel)value;
+            }
+        }
+
+        #endregion
     }
 }
