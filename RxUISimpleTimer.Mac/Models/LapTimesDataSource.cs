@@ -24,15 +24,18 @@ namespace RxUISimpleTimer.Mac.Models
     {
         readonly LapTimesDataSource DataSource;
 
-        public LapTimesViewDelegate(LapTimesDataSource source)
+        public LapTimesViewDelegate(LapTimesDataSource source, Func<TimeSpan, string> converter)
         {
             DataSource = source;
+            this.converter = converter;
         }
 
         const string ColumnIdentifierLap = "Lap";
         const string ColumnIdentifierElapsed = "Elapsed";
         const string ColumnIdentifierDuration = "Duration";
         const string FormatString = @"hh\:mm\:ss\.fff";
+
+        private readonly Func<TimeSpan, string> converter;
 
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
@@ -45,10 +48,10 @@ namespace RxUISimpleTimer.Mac.Models
                     view.TextField.StringValue = (row + 1).ToString();
                     break;
                 case ColumnIdentifierElapsed:
-                    view.TextField.StringValue = entry.Elapsed.ToString(FormatString);
+                    view.TextField.StringValue = converter(entry.Elapsed);
                     break;
                 case ColumnIdentifierDuration:
-                    view.TextField.StringValue = entry.Duration.ToString(FormatString);
+                    view.TextField.StringValue = converter(entry.Duration);
                     break;
             }
 

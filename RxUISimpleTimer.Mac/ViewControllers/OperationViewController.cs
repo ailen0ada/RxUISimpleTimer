@@ -8,6 +8,9 @@ using ReactiveUI;
 using RxUISimpleTimer.Core.ViewModels;
 using Splat;
 using System.Diagnostics;
+using RxUISimpleTimer.Mac.Converters;
+using CoreMedia;
+using VideoToolbox;
 
 namespace RxUISimpleTimer.Mac.ViewControllers
 {
@@ -21,12 +24,15 @@ namespace RxUISimpleTimer.Mac.ViewControllers
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
             VM = Locator.CurrentMutable.GetService<OperationViewModel>();
             this.OneWayBind(VM, vm => vm.Elapsed, v => v.CurrentValueField.StringValue);
+            this.Bind(VM, vm => vm.ShowMilliseconds, v => v.ToggleMilliseconds.State);
             this.BindCommand(VM, vm => vm.Start, v => v.StartButton);
             this.BindCommand(VM, vm => vm.Stop, v => v.StopButton);
             this.BindCommand(VM, vm => vm.Lap, v => v.LapButton);
+
+            // ugly
+            this.ToggleMilliseconds.Activated += (_, __) => VM.ShowMilliseconds = this.ToggleMilliseconds.State == NSCellStateValue.On;
         }
 
         private OperationViewModel VM;

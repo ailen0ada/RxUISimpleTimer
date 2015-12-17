@@ -23,6 +23,9 @@ namespace RxUISimpleTimer.Mac.ViewControllers
 
 		[Outlet]
 		AppKit.NSButton StopButton { get; set; }
+
+		[Outlet]
+		AppKit.NSButton ToggleMilliseconds { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -44,6 +47,11 @@ namespace RxUISimpleTimer.Mac.ViewControllers
 			if (StopButton != null) {
 				StopButton.Dispose ();
 				StopButton = null;
+			}
+
+			if (ToggleMilliseconds != null) {
+				ToggleMilliseconds.Dispose ();
+				ToggleMilliseconds = null;
 			}
 		}
 	}

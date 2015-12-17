@@ -6,6 +6,7 @@ using RxUISimpleTimer.Core.Models;
 using RxUISimpleTimer.Core.ViewModels;
 using System.Reactive.Concurrency;
 using ReactiveUI;
+using RxUISimpleTimer.Mac.Converters;
 
 namespace RxUISimpleTimer.Mac
 {
@@ -15,6 +16,7 @@ namespace RxUISimpleTimer.Mac
         public AppDelegate()
         {
             Locator.CurrentMutable.RegisterLazySingleton(() => new NativeDialog(), typeof(IDialogService));
+            Locator.CurrentMutable.RegisterConstant(new CellStateConverter(), typeof(IBindingTypeConverter));
             Locator.CurrentMutable.RegisterLazySingleton(() => new OperationViewModel(RxApp.MainThreadScheduler), typeof(OperationViewModel));
         }
 

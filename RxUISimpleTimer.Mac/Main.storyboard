@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -914,11 +915,20 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="hou-Mz-NPm">
+                                <rect key="frame" x="158" y="73" width="134" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show milliseconds" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="nrZ-QV-xLG">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Yc9-cH-wEX" firstAttribute="centerY" secondItem="ijo-H6-MSI" secondAttribute="centerY" id="1fa-pi-sEA"/>
+                            <constraint firstItem="hou-Mz-NPm" firstAttribute="centerX" secondItem="ijo-H6-MSI" secondAttribute="centerX" id="U0g-5O-ptt"/>
                             <constraint firstItem="Yc9-cH-wEX" firstAttribute="leading" secondItem="ijo-H6-MSI" secondAttribute="leading" constant="20" symbolic="YES" id="YGd-aA-GLQ"/>
                             <constraint firstItem="pS2-eP-0uo" firstAttribute="centerX" secondItem="Yc9-cH-wEX" secondAttribute="centerX" id="loM-nj-hVD"/>
+                            <constraint firstItem="hou-Mz-NPm" firstAttribute="top" secondItem="pS2-eP-0uo" secondAttribute="bottom" constant="20" id="stH-1o-2lf"/>
                             <constraint firstAttribute="trailing" secondItem="Yc9-cH-wEX" secondAttribute="trailing" constant="20" symbolic="YES" id="uYl-JH-t9s"/>
                             <constraint firstItem="pS2-eP-0uo" firstAttribute="top" secondItem="Yc9-cH-wEX" secondAttribute="bottom" constant="8" symbolic="YES" id="w0L-gB-T2E"/>
                         </constraints>
@@ -928,6 +938,7 @@
                         <outlet property="LapButton" destination="ciT-pu-pZd" id="F6u-fF-XJp"/>
                         <outlet property="StartButton" destination="BGr-9j-KX7" id="IBs-6C-Fvk"/>
                         <outlet property="StopButton" destination="bGg-dH-we5" id="Z17-yK-n4P"/>
+                        <outlet property="ToggleMilliseconds" destination="hou-Mz-NPm" id="jT6-1f-JnN"/>
                     </connections>
                 </viewController>
                 <customObject id="edq-0o-h1C" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -29,18 +29,23 @@ namespace RxUISimpleTimer.Mac.ViewControllers
             VM = Locator.CurrentMutable.GetService<OperationViewModel>();
             var ds = new LapTimesDataSource(VM.LapTimes);
             HistoryTableView.DataSource = ds;
-            HistoryTableView.Delegate = new LapTimesViewDelegate(ds);
+            HistoryTableView.Delegate = new LapTimesViewDelegate(ds, VM.GetFormattedElapsed);
             CountChangedSubscription = VM.LapTimes.CountChanged.Subscribe(_ => InvokeOnMainThread(HistoryTableView.ReloadData));
+            ShowMsecSubscription = VM.WhenAnyValue(vm => vm.ShowMilliseconds).Subscribe(_ => InvokeOnMainThread(HistoryTableView.ReloadData));
         }
 
         private OperationViewModel VM;
 
         private IDisposable CountChangedSubscription;
 
+        private IDisposable ShowMsecSubscription;
+
         protected override void Dispose(bool disposing)
         {
             CountChangedSubscription.Dispose();
+            ShowMsecSubscription.Dispose();
             CountChangedSubscription = null;
+            ShowMsecSubscription = null;
             base.Dispose(disposing);
         }
 
